@@ -62,7 +62,7 @@ const subsSchema = new mongoose.Schema({
 
 
 // auto calculate renewal date
-subsSchema.pre('save', function () {
+subsSchema.pre('save', function (next) {
    const renewalPeriods = {
       daily: 1,
       weekly: 7,
@@ -76,6 +76,8 @@ subsSchema.pre('save', function () {
    if (this.renewalDate < new Date()) {
       this.status = 'Expired';
    };
+
+   next();
 })
 
 
