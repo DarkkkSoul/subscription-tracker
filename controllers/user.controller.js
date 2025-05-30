@@ -7,7 +7,7 @@ export const getUsers = async (req, res, next) => {
       res.status(200).json({
          message: 'User Found',
          data: users
-      })
+      });
 
    } catch (error) {
       next(error);
