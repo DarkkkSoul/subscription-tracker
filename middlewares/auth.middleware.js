@@ -6,16 +6,26 @@ const authorize = async (req, res, next) => {
    try {
       let token;
 
+      // check if token is available in the header
+
       if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
+         // extract the token by splitting brearer and getting the second part
+
+         // Header = {
+         //    Authorization: 'Bearer <token>'
+         // }
+
          token = req.headers.authorization.split(' ')[1];
       }
 
+      // Checking if token is available
       if (!token) {
-         const error = new Error('Not authorized to access this route');
+         const error = new Error('No Token Found - Unauthorized');
          error.statusCode = 401;
          throw error;
       }
 
+      // Checking if token is valid
       const decoded = jwt.verify(token, JWT_SECRET);
 
       const user = await User.findById(decoded.userId);

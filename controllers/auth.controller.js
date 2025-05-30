@@ -70,7 +70,7 @@ export const signIn = async (req, res, next) => {
       const isPassValid = await bcrypt.compare(password, user.password);
 
       // 2. check if password is wrong
-      if (isPassValid) {
+      if (!isPassValid) {
          const error = new Error('Incorrect Password');
          error.statusCode = 401;
          throw error;
