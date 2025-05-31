@@ -6,7 +6,6 @@ const subsSchema = new mongoose.Schema({
       type: String,
       trim: true,
       minLength: 2,
-      maxLength: 10,
    },
    price: {
       required: true,
@@ -34,7 +33,6 @@ const subsSchema = new mongoose.Schema({
    status: {
       type: String,
       enum: ['Active', 'Cancelled', 'Expired'],
-      required: true,
    },
    startDate: {
       type: Date,
@@ -52,7 +50,7 @@ const subsSchema = new mongoose.Schema({
       }
    },
    user: {
-      type: mongoose.Schema.Types / ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
       required: true,
       index: true,
