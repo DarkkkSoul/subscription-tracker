@@ -36,7 +36,7 @@ const subsSchema = new mongoose.Schema({
    },
    startDate: {
       type: Date,
-      required: true,
+      default: Date.now(),
       validate: {
          validator: (value) => value <= new Date(),
          messgae: 'Start date must be in the past'

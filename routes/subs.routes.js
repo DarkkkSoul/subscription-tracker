@@ -1,6 +1,6 @@
 import { Router } from "express";
 import authorize from "../middlewares/auth.middleware.js";
-import { createSubs } from "../controllers/subs.controller.js";
+import { createSubs, getSubs } from "../controllers/subs.controller.js";
 
 const subsRouter = Router();
 
@@ -14,5 +14,6 @@ const subsRouter = Router();
 // subsRouter.get('/upcoming-renewals', (req, res) => res.send({ message: 'GET - get upcoming subscriptions' }));
 
 subsRouter.post('/',authorize, createSubs);
+subsRouter.get('/user/:id', authorize, getSubs);
 
 export default subsRouter;
