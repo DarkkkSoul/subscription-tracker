@@ -43,7 +43,7 @@ export const getSubs = async (req, res, next) =>{
 export const deleteSubs =async(req, res, next) =>{
    try {
 
-      const subs = await Subscription.findById({_id: req.params.id});
+      const subs = await Subscription.findById(req.params.id);
 
       if(!subs){
          const error = new Error('Subscription not found');
@@ -57,6 +57,33 @@ export const deleteSubs =async(req, res, next) =>{
          success: true,
          message: 'Subscription Deleted',
       });
+
+   } catch (error) {
+      next(error);
+   }
+}
+
+export const updateSubs = async(req, res, next) =>{
+   try {
+
+      const subs = await Subscription.findById(req.params.id);
+
+      if(!subs){
+         let error =  new Error("Subscription not found");
+         error.statusCode = 404;
+         throw error;
+      };
+      
+      subs.set(req.body);
+
+      await subs.save();
+
+      res.status(200).json({
+         success: true,
+         message: 'Subscription Updated',
+         data: subs,
+      });
+      
 
    } catch (error) {
       next(error);

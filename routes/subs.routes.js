@@ -1,6 +1,6 @@
 import { Router } from "express";
 import authorize from "../middlewares/auth.middleware.js";
-import { createSubs, deleteSubs, getSubs } from "../controllers/subs.controller.js";
+import { createSubs, deleteSubs, getSubs, updateSubs } from "../controllers/subs.controller.js";
 
 const subsRouter = Router();
 
@@ -18,7 +18,7 @@ const subsRouter = Router();
 subsRouter.post('/',authorize, createSubs);
 subsRouter.get('/user/:id', authorize, getSubs);
 subsRouter.delete('/:id', authorize, deleteSubs );
-
+subsRouter.put('/:id', authorize, updateSubs);
 
 
 export default subsRouter;
